@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">My Application</string>
+    <string name="text_back_button" tools:ignore="UnusedResources">Back Button</string>
+    <string name="text_PokemonList">Pokemon List</string>
+    <string name="text_PokemonDetails">Pokemon Details</string>
+    <string name="text_search">Attrapez les tous…</string>
+    <string name="text_title" tools:ignore="UnusedResources">Bulbizarre</string>
+    <string name="text_statistiques" tools:ignore="UnusedResources">Statistiques</string>
+
+</resources>
