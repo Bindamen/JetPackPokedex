@@ -26,12 +26,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
+import com.example.myapplication.Model.Abilities
 import com.example.myapplication.Model.AbilitiesItem
 import com.example.myapplication.R
 import com.example.myapplication.Utils.parseGenToId
 import com.example.myapplication.Utils.parseStatToAbbr
 import com.example.myapplication.Utils.parseTypeToColor
-import com.example.myapplication.View.AbilityDetails
 import java.util.*
 
 
@@ -73,6 +73,7 @@ fun PokemonDetailCard(
     Female: Double,
     Game: String,
     Region: String,
+
 
 ) {
 
@@ -130,6 +131,7 @@ fun PokemonDetailCard(
                 Female,
                 Game,
                 Region,
+
             )
 
         }
@@ -176,6 +178,7 @@ fun   PokemonImageContentView(
     Female: Double,
     Game: String,
     Region: String,
+
 ) {
 // content
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -266,7 +269,10 @@ fun   PokemonImageContentView(
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.onSurface
             )
-           // AbilityDetails(viewModel = viewModel())
+
+            PokemonTech(viewModel = viewModel(), type = type)
+
+
 
 
 
@@ -319,10 +325,13 @@ fun PokemonCarac(
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .size(24.dp),
-                alignment = Alignment.CenterStart,)
+                alignment = Alignment.TopStart,
+                
+            )
 
             Spacer(modifier = Modifier.padding(7.dp))
             Column{
+                
                 Text(
                     text = "Jeux:",
                     textAlign = TextAlign.Start,
@@ -338,6 +347,7 @@ fun PokemonCarac(
                     Spacer(modifier = Modifier.padding(horizontal = 10.dp))
 
                 }
+                Spacer(modifier = Modifier.fillMaxWidth())
             }
         }
         Spacer(modifier = Modifier.padding(7.dp))
@@ -1357,7 +1367,8 @@ fun PokemonDescription(
         Image(
             painter = painterResource(parseGenToId(Gen)),
             contentDescription = "",
-            alignment = Alignment.Center
+            alignment = Alignment.Center,
+
 
         )
 

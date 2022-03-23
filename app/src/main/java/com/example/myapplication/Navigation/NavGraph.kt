@@ -13,7 +13,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.myapplication.View.AbilityDetails
 import com.example.myapplication.View.PokemonDetailsScreen
 import com.example.myapplication.View.PokemonListScreen
 import com.example.myapplication.ViewModel.MainViewModel
@@ -54,9 +53,9 @@ fun NavGraph() {
                 ?: throw IllegalStateException("'Pokemon ID ' shouldn't be null")
 
             viewModel.getPokemonID(context = context, idNo = id)
-            //viewModel.getPokemonAbilty(context = context)
+            viewModel.getAbilities(context = context, idNo = id)
             PokemonDetailsScreen(viewModel, actions)
-           // AbilityDetails(viewModel)
+
 
         }
     }

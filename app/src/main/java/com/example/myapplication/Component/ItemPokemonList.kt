@@ -43,9 +43,6 @@ fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemCl
         .clip(RoundedCornerShape(10.dp))
         .background(MaterialTheme.colors.background)
         .padding(8.dp),
-
-
-
     )
 
     {
