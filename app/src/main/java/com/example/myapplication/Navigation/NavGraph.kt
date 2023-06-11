@@ -3,6 +3,7 @@ package com.example.myapplication.Navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -53,7 +54,8 @@ fun NavGraph() {
                 ?: throw IllegalStateException("'Pokemon ID ' shouldn't be null")
 
             viewModel.getPokemonID(context = context, idNo = id)
-            viewModel.getAbilities(context = context, idNo = id)
+            viewModel.getAbilities(context = context)
+
             PokemonDetailsScreen(viewModel, actions)
 
 

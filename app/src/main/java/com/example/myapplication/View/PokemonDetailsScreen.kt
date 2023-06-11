@@ -88,7 +88,6 @@ fun PokemonDetails(viewModel: MainViewModel) {
                         pokemon.Region,
 
                     )
-
                 }
             }
         }

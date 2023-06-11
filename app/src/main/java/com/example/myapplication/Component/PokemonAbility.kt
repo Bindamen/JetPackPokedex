@@ -22,35 +22,10 @@ import com.example.myapplication.ui.theme.text
 import kotlinx.coroutines.flow.forEach
 
 @Composable
-fun AbilityView(
-    viewModel: MainViewModel,
-    type: List<String>,
-    id:Int
-){
-    when (val result = viewModel.abilitiesList.value) {
-
-        ViewStateAb.Empty -> Text("No Results Found!")
-        is ViewStateAb.Error -> Text(text = "Error found: ${result.exception}")
-        ViewStateAb.Loading -> Text(text = "Loading")
-        is ViewStateAb.Success -> {
-
-            val abilitiesList = result.data
-
-            abilitiesList.forEach{
-                if (it.id == id) {
-                    PokemonTech(viewModel = viewModel(), type = type)
-                }
-
-            }
-        }
-    }
-}
-
-
-@Composable
 fun PokemonTech(
     viewModel: MainViewModel,
     type: List<String>,
+    id: Int
 
 
 ) {
@@ -63,29 +38,31 @@ fun PokemonTech(
 
             val abilitiesItem = result.data
 
-            for (i in arrayListOf(abilitiesItem)) {
-                
-                Column(modifier = Modifier.padding(24.dp)) {
-                    Row(modifier = Modifier.align(Alignment.Start)) {
-                        Text(
-                            text = i.name.capitalize(),
-                            textAlign = TextAlign.Start,
-                            fontWeight = FontWeight.Bold,
-                            color = parseTypeToColor(type[0])
-                        )
+            abilitiesItem.forEach {
+                if(it.id == id){
+                    Column(modifier = Modifier.padding(15.dp)) {
+                        Row(modifier = Modifier.align(Alignment.Start)) {
+                            Text(
+                                text = it.name.capitalize(),
+                                textAlign = TextAlign.Start,
+                                fontWeight = FontWeight.Bold,
+                                color = parseTypeToColor(type[0])
+                            )
+                        }
+                        Row(
+                            modifier = Modifier
+                                .padding(horizontal = 15.dp)
+                                .align(Alignment.Start)
+                        ) {
+                            Text(
+                                text = it.text.replace(oldValue = "\n", newValue = " "),
+                                textAlign = TextAlign.Start
+                            )
+                        }
+                        Spacer(modifier = Modifier.padding(2.dp))
                     }
-                    Row(
-                        modifier = Modifier
-                            .padding(horizontal = 15.dp)
-                            .align(Alignment.Start)
-                    ) {
-                        Text(
-                            text = i.text.replace(oldValue = "\n", newValue = " "),
-                            textAlign = TextAlign.Start
-                        )
-                    }
-                    Spacer(modifier = Modifier.padding(7.dp))
                 }
+
             }
 
         }
