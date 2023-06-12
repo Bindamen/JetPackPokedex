@@ -62,9 +62,7 @@ fun PokemonTech(
                         Spacer(modifier = Modifier.padding(2.dp))
                     }
                 }
-
             }
-
         }
     }
 }
