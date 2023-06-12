@@ -49,10 +49,10 @@ fun parseStatToColor(statName: String): Color {
                 "HP" -> "HP"
                 "Attack" -> "Atk"
                 "Defense" -> "Def"
-                "SpAttack" -> "SpAtk"
-                "SpDefense" -> "SpDef"
+                "SpAttack" -> "SpA"
+                "SpDefense" -> "SpD"
                 "Speed" -> "Spd"
-                "BaseTotal" -> "Total"
+                "BaseTotal" -> "Tot"
                 else -> ""
 
             }

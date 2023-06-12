@@ -19,7 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -27,31 +29,35 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.myapplication.Navigation.MainActions
 import com.example.myapplication.R
+import com.example.myapplication.Utils.parseStatToColor
 import com.example.myapplication.Utils.parseTypeToColor
-import com.example.myapplication.ui.theme.Shapes
-import com.example.myapplication.ui.theme.primary
-import com.example.myapplication.ui.theme.text
-import com.example.myapplication.ui.theme.typography
+import com.example.myapplication.ui.theme.*
 import java.util.*
 
 
 @Composable
 fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemClick : () -> Unit) {
 
+
     Card(modifier = Modifier
         .clickable(onClick = onItemClick)
         .clip(RoundedCornerShape(10.dp))
         .background(MaterialTheme.colors.background)
         .padding(8.dp),
-
-
-
     )
 
     {
+
         Row(modifier = Modifier
             .fillMaxWidth()
-            .background(Brush.horizontalGradient(listOf(Color.White, parseTypeToColor(type[0])))),
+            .background(
+                Brush.horizontalGradient(
+                    listOf(
+                        Color.Transparent,
+                        parseTypeToColor(type[0])
+                    )
+                )
+            ),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically) {
 
@@ -81,7 +87,7 @@ fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemCl
                 text = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
                 style = typography.h6,
                 fontWeight = FontWeight.Bold,
-                color = text,
+                color = MaterialTheme.colors.onSurface,
                 textAlign = TextAlign.Start
 
             )
@@ -122,7 +128,6 @@ fun ChipView(types: String) {
             color = Color.White,
 
             )
-
     }
     Spacer(modifier = Modifier.padding(horizontal = 7.dp))
 }
@@ -131,17 +136,14 @@ fun ChipView(types: String) {
 fun TopBar(name:String, action: MainActions){
     Row(modifier = Modifier
         .fillMaxWidth()
-        .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+        .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically) {
         Icon(imageVector = Icons.Default.ArrowBack,
             contentDescription = stringResource(R.string.text_back_button),
-            modifier = Modifier
-                .clickable(onClick = action.upPress))
+            modifier = Modifier.clickable(onClick = action.upPress))
         Spacer(modifier = Modifier.width(12.dp))
-        Text(text = name, style = typography.h5, color = MaterialTheme.colors.primaryVariant)
-
-
+        Text(text = name, style = typography.h5, color = MaterialTheme.colors.onSurface)
     }
 
 }
@@ -163,7 +165,7 @@ fun TextInputField(label: String, value: String, onValueChanged: (String) -> Uni
     Box {
         OutlinedTextField(modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp),
+            .padding(start = 8.dp, end = 8.dp),
             value = value,
             onValueChange = {
                 onValueChanged(it)
@@ -177,8 +179,37 @@ fun TextInputField(label: String, value: String, onValueChanged: (String) -> Uni
                     keyboardController?.hide()
                 }
             ))
+
     }
 
+}
+@Composable
+fun TypeFilterChip(
+    typeP:String,
+
+    onValueChanged: (String) -> Unit
+
+){
+    Surface(
+        modifier = Modifier
+            .padding(end = 8.dp),
+        elevation = 8.dp,
+        shape = MaterialTheme.shapes.medium,
+
+    ){
+        Row(modifier = Modifier
+            .clickable(onClick = {
+                onValueChanged(typeP)
+            })
+        ) {
+            Text(
+                text = typeP.capitalize(),
+                style = MaterialTheme.typography.button,
+                color = MaterialTheme.colors.onSurface,
+                modifier = Modifier.padding(8.dp)
+            )
+        }
+    }
 }
 
 @Composable

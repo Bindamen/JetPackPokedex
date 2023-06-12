@@ -3,6 +3,7 @@ package com.example.myapplication.Navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,7 +14,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.myapplication.View.AbilityDetails
 import com.example.myapplication.View.PokemonDetailsScreen
 import com.example.myapplication.View.PokemonListScreen
 import com.example.myapplication.ViewModel.MainViewModel
@@ -54,9 +54,10 @@ fun NavGraph() {
                 ?: throw IllegalStateException("'Pokemon ID ' shouldn't be null")
 
             viewModel.getPokemonID(context = context, idNo = id)
-            //viewModel.getPokemonAbilty(context = context)
+            viewModel.getAbilities(context = context)
+
             PokemonDetailsScreen(viewModel, actions)
-           // AbilityDetails(viewModel)
+
 
         }
     }

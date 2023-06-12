@@ -30,8 +30,6 @@ fun PokemonDetailsScreen(viewModel: MainViewModel, actions: MainActions) {
         TopBar(name = stringResource(id = R.string.text_PokemonDetails), action = actions)
     }) {
         PokemonDetails(viewModel = viewModel)
-
-
     }
 }
 
@@ -48,10 +46,6 @@ fun PokemonDetails(viewModel: MainViewModel) {
         is DetailViewState.Success -> {
 
             val pokemon = result.data
-         //   val ability = result.datab
-
-
-
 
             LazyColumn {
                 item {
@@ -92,10 +86,6 @@ fun PokemonDetails(viewModel: MainViewModel) {
                         pokemon.Female,
                         pokemon.Game,
                         pokemon.Region,
-                    //    ability.AbilityName,
-                    //    ability.AbilityDesc
-                        
-
 
                     )
                 }

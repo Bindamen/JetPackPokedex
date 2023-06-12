@@ -4,19 +4,26 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,13 +32,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.example.myapplication.Model.Abilities
 import com.example.myapplication.Model.AbilitiesItem
 import com.example.myapplication.R
 import com.example.myapplication.Utils.parseGenToId
 import com.example.myapplication.Utils.parseStatToAbbr
 import com.example.myapplication.Utils.parseTypeToColor
-import com.example.myapplication.View.AbilityDetails
 import java.util.*
 
 
@@ -74,24 +82,39 @@ fun PokemonDetailCard(
     Game: String,
     Region: String,
 
+
+
+
 ) {
 
 // Transparent white bg
     Box(
         Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    listOf(
+                        Color.Transparent,
+                        parseTypeToColor(type[0]),
+                        parseTypeToColor(type[0]),
+                        parseTypeToColor(type[0]),
+                        parseTypeToColor(type[0])
+
+                    )
+                )
+            )
             .padding(start = 20.dp, end = 16.dp, top = 40.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(Brush.verticalGradient(listOf(Color.White, parseTypeToColor(type[0])))),
+            .clip(RoundedCornerShape(12.dp)),
         contentAlignment = Alignment.Center
     ) {
 
-// white box layout
+ //white box layout
         Box(
             Modifier
+
                 .fillMaxSize()
                 .clip(RoundedCornerShape(12.dp))
-                .background(MaterialTheme.colors.surface),
+                .padding(bottom = 50.dp),
         ) {
             PokemonImageContentView(
                 name,
@@ -130,12 +153,12 @@ fun PokemonDetailCard(
                 Female,
                 Game,
                 Region,
+
             )
-
-        }
-
+      }
     }
 }
+
 
 
 @Composable
@@ -176,10 +199,15 @@ fun   PokemonImageContentView(
     Female: Double,
     Game: String,
     Region: String,
+
+
 ) {
 // content
-    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-
+    Column(
+        modifier = Modifier
+        .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally)
+    {
 //image
         Image(
             painter = rememberImagePainter(
@@ -188,17 +216,19 @@ fun   PokemonImageContentView(
 
             contentDescription = name,
             modifier = Modifier
-
-                .size(200.dp)
+                .size(250.dp)
+                .padding(start = 2.dp, end = 2.dp, bottom = 2.dp),
+            alignment = Alignment.TopCenter
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(2.dp))
         Column(
             modifier = Modifier
+                .shadow(elevation = 2.dp, shape = RoundedCornerShape(12.dp))
                 .fillMaxWidth()
-
+                .clip(RoundedCornerShape(12.dp))
                 .background(MaterialTheme.colors.surface)
-                .padding(bottom = 24.dp),
+                .padding(bottom = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
@@ -208,7 +238,8 @@ fun   PokemonImageContentView(
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colors.onSurface,
+                modifier = Modifier.padding(top = 10.dp)
             )
 
             Row(
@@ -230,6 +261,7 @@ fun   PokemonImageContentView(
                         Text(
                             text = type.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
                             color = Color.White,
+                            fontWeight = FontWeight.Bold,
                             fontSize = 18.sp
                         )
                     }
@@ -237,7 +269,7 @@ fun   PokemonImageContentView(
             }
             PokemonDetailDataSection(weight, height)
             PokemonBaseStats(hp, attack, SpDefense, SpAttack, Speed, Defense, BaseTotal, type)
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(2.dp))
             Text(
                 text = "Description",
                 fontSize = 30.sp,
@@ -246,47 +278,50 @@ fun   PokemonImageContentView(
             )
 
             PokemonDescription(Gen)
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(2.dp))
             Text(
                 text = "Faiblesses",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.onSurface
             )
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(2.dp))
             PokemonWeaknesses(against_acier,against_combat, against_dragon, against_eau, against_electric, against_fée,
                 against_feu, against_glace, against_insecte, against_normal, against_plante, against_poison, against_psy,
                 against_roche, against_sol, against_spectre, against_ténèbres, against_vol,
 
                 )
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(2.dp))
             Text(
                 text = "Techniques",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.onSurface
             )
-           // AbilityDetails(viewModel = viewModel())
+
+           PokemonTech(viewModel = viewModel(), type = type,id)
+            //AbilityView(viewModel = viewModel(), type = type,id)
 
 
 
-            Spacer(modifier = Modifier.padding(10.dp))
+
+            Spacer(modifier = Modifier.padding(2.dp))
             Text(
                 text = "Caractéristiques",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.onSurface
             )
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(2.dp))
             PokemonCarac(type, Male, Female, Game, Region)
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(2.dp))
             Text(
                 text = "Shiny",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.onSurface
             )
-            Spacer(modifier = Modifier.padding(10.dp))
+            Spacer(modifier = Modifier.padding(2.dp))
             ShinyPokemonPic(id)
         }
     }
@@ -311,7 +346,7 @@ fun PokemonCarac(
         ) {
 
         Spacer(modifier = Modifier.padding(7.dp))
-        Row(modifier = Modifier.padding(horizontal = 15.dp)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             Image(
 
                 painter = painterResource(id = R.drawable.ic_baseline_videogame_asset_24),
@@ -319,10 +354,13 @@ fun PokemonCarac(
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .size(24.dp),
-                alignment = Alignment.CenterStart,)
+                alignment = Alignment.TopStart,
+                
+            )
 
             Spacer(modifier = Modifier.padding(7.dp))
             Column{
+                
                 Text(
                     text = "Jeux:",
                     textAlign = TextAlign.Start,
@@ -338,10 +376,11 @@ fun PokemonCarac(
                     Spacer(modifier = Modifier.padding(horizontal = 10.dp))
 
                 }
+                Spacer(modifier = Modifier.fillMaxWidth())
             }
         }
         Spacer(modifier = Modifier.padding(7.dp))
-        Row(modifier = Modifier.padding(horizontal = 15.dp)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             Image(
                 painter = painterResource(id = R.drawable.ic_baseline_public_24),
 
@@ -371,7 +410,7 @@ fun PokemonCarac(
             }
         }
         Spacer(modifier = Modifier.padding(7.dp))
-        Row(modifier = Modifier.padding(horizontal = 15.dp)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             Image(
                 painter = painterResource(id = R.drawable.ic_baseline_catching_pokemon_24),
 
@@ -489,7 +528,7 @@ fun PokemonStat(
     statValue: Int,
     statMaxValue: Int,
     statColor: Color,
-    height: Dp = 20.dp,
+    height: Dp = 25.dp,
     animDuration: Int = 1000,
     animDelay: Int = 0
 ) {
@@ -544,6 +583,7 @@ fun PokemonStat(
                 fontSize = 14.sp,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
+
             )
 
             Text(
@@ -552,6 +592,7 @@ fun PokemonStat(
                 fontSize = 14.sp,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
+
             )
 
         }
@@ -651,21 +692,19 @@ fun PokemonBaseStats(
 fun ShinyPokemonPic(
     id: Int
 ) {
-//"https://www.pokebip.com/pokedex-images/300-shiny/
-
     Column(
-
     )
     {
-
         Image(
-            painter = rememberImagePainter(
-                data = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/$id.png"
+            painter = rememberImagePainter(data = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/$id.png"
             ),
             contentDescription = "",
             modifier = Modifier
-                .size(140.dp)
+                .size(250.dp)
+                .fillMaxSize(),
+            alignment = Alignment.TopCenter
         )
+        Spacer(modifier = Modifier.fillMaxHeight())
     }
 }
 
@@ -1357,7 +1396,8 @@ fun PokemonDescription(
         Image(
             painter = painterResource(parseGenToId(Gen)),
             contentDescription = "",
-            alignment = Alignment.Center
+            alignment = Alignment.Center,
+
 
         )
 
