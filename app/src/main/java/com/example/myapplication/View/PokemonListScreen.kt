@@ -1,6 +1,7 @@
 package com.example.myapplication.View
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
@@ -9,10 +10,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScrollableTabRow
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +32,7 @@ import com.example.myapplication.Utils.ViewState
 import com.example.myapplication.ViewModel.MainViewModel
 import kotlin.reflect.typeOf
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @ExperimentalComposeUiApi
 @Composable
 fun PokemonListScreen(viewModel: MainViewModel, actions: MainActions) {
@@ -63,29 +65,25 @@ fun PokemonList(pokemonList: List<PokemonItem>, actions: MainActions){
 
 
 Surface(
-        color = MaterialTheme.colors.background,
+        color = MaterialTheme.colorScheme.background,
         modifier = Modifier.fillMaxSize()
     ) {
 
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(top = 24.dp, bottom = 24.dp),
-            modifier = Modifier.background(MaterialTheme.colors.background)
+            modifier = Modifier.background(MaterialTheme.colorScheme.background)
         ) {
             // title
-
             item {
-
                 Spacer(modifier = Modifier.height(20.dp))
                 Image(
                     painter = painterResource(id = R.drawable.ic_international_pok_mon_logo),
                     contentDescription = "Pokemon",
                     modifier = Modifier
                         .fillMaxWidth()
-
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-
                 TextInputField(
                     label = stringResource(R.string.text_search),
                     value = search.value,
@@ -98,14 +96,12 @@ Surface(
                     for(type in getAllTypeCategories()){
                         TypeFilterChip(typeP = type.value, onValueChanged = {
                             //filterPokemonItem.value = it
-                            search.value = it
-
+                            //search.value = it
                         })
                     }
                 }
                 Spacer(modifier = Modifier.height(10.dp))
             }
-
             //All Pokemon List View
             items(pokemonList.filter {
                 it.name.contains(
@@ -127,7 +123,8 @@ Surface(
                 })
             }
             items(pokemonList.filter {
-                it.type.toString().contains(
+                it.type.toString()
+                    .contains(
                     search.value
                 )
             }){ pokemon ->

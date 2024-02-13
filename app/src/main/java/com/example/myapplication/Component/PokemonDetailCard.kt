@@ -9,12 +9,10 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -227,7 +225,7 @@ fun   PokemonImageContentView(
                 .shadow(elevation = 2.dp, shape = RoundedCornerShape(12.dp))
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(12.dp))
-                .background(MaterialTheme.colors.surface)
+                .background(MaterialTheme.colorScheme.surface)
                 .padding(bottom = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -238,7 +236,7 @@ fun   PokemonImageContentView(
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(top = 10.dp)
             )
 
@@ -274,7 +272,7 @@ fun   PokemonImageContentView(
                 text = "Description",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             PokemonDescription(Gen)
@@ -283,7 +281,7 @@ fun   PokemonImageContentView(
                 text = "Faiblesses",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.padding(2.dp))
             PokemonWeaknesses(against_acier,against_combat, against_dragon, against_eau, against_electric, against_fée,
@@ -296,7 +294,7 @@ fun   PokemonImageContentView(
                 text = "Techniques",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colorScheme.onSurface
             )
 
            PokemonTech(viewModel = viewModel(), type = type,id)
@@ -310,7 +308,7 @@ fun   PokemonImageContentView(
                 text = "Caractéristiques",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.padding(2.dp))
             PokemonCarac(type, Male, Female, Game, Region)
@@ -319,7 +317,7 @@ fun   PokemonImageContentView(
                 text = "Shiny",
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSurface
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.padding(2.dp))
             ShinyPokemonPic(id)
@@ -512,12 +510,12 @@ fun PokemonDetailDataItem(
         Icon(
             painter = dataIcon,
             contentDescription = null,
-            tint = MaterialTheme.colors.onSurface
+            tint = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "$dataValue$dataUnit",
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -623,7 +621,7 @@ fun PokemonBaseStats(
             text = "Base Stat:",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.onSurface
+            color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.height(7.dp))
 

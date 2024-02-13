@@ -46,7 +46,7 @@ data class PokemonItem(
     @SerializedName("Attack")
      val Attack: Int,
     @SerializedName("BaseTotal")
-     val BaseTotal: Int ,
+     val BaseTotal: Int = 300 ,
     @SerializedName("Defense")
      val Defense: Int ,
     @SerializedName("evolution_chain_id")

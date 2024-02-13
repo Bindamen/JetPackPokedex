@@ -11,6 +11,14 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -42,7 +50,7 @@ fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemCl
     Card(modifier = Modifier
         .clickable(onClick = onItemClick)
         .clip(RoundedCornerShape(10.dp))
-        .background(MaterialTheme.colors.background)
+        .background(MaterialTheme.colorScheme.background)
         .padding(8.dp),
     )
 
@@ -85,9 +93,9 @@ fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemCl
             Text(
                 modifier = Modifier.padding(5.dp),
                 text = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-                style = typography.h6,
+                style = typography.bodyLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Start
 
             )
@@ -123,7 +131,7 @@ fun ChipView(types: String) {
 
         Text(
             text = types.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-            style = typography.caption,
+            style = typography.labelSmall,
             fontWeight = FontWeight.Bold,
             color = Color.White,
 
@@ -143,7 +151,7 @@ fun TopBar(name:String, action: MainActions){
             contentDescription = stringResource(R.string.text_back_button),
             modifier = Modifier.clickable(onClick = action.upPress))
         Spacer(modifier = Modifier.width(12.dp))
-        Text(text = name, style = typography.h5, color = MaterialTheme.colors.onSurface)
+        Text(text = name, style = typography.displaySmall, color = MaterialTheme.colorScheme.onSurface)
     }
 
 }
@@ -151,12 +159,13 @@ fun TopBar(name:String, action: MainActions){
 fun LabelView(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.caption,
+        style = MaterialTheme.typography.labelSmall,
         textAlign = TextAlign.Start,
-        color = MaterialTheme.colors.primary
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalComposeUiApi
 @Composable
 fun TextInputField(label: String, value: String, onValueChanged: (String) -> Unit) {
@@ -171,7 +180,7 @@ fun TextInputField(label: String, value: String, onValueChanged: (String) -> Uni
                 onValueChanged(it)
             },
             label = { LabelView(title = label) },
-            textStyle = MaterialTheme.typography.body1,
+            textStyle = MaterialTheme.typography.labelSmall,
             colors = textFieldColors(),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(
@@ -193,7 +202,7 @@ fun TypeFilterChip(
     Surface(
         modifier = Modifier
             .padding(end = 8.dp),
-        elevation = 8.dp,
+
         shape = MaterialTheme.shapes.medium,
 
     ){
@@ -204,22 +213,23 @@ fun TypeFilterChip(
         ) {
             Text(
                 text = typeP.capitalize(),
-                style = MaterialTheme.typography.button,
-                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(8.dp)
             )
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun textFieldColors() = TextFieldDefaults.textFieldColors(
-    textColor = MaterialTheme.colors.primary,
-    focusedLabelColor = MaterialTheme.colors.primary,
-    focusedIndicatorColor = MaterialTheme.colors.primary,
-    unfocusedIndicatorColor = MaterialTheme.colors.primary,
-    cursorColor = MaterialTheme.colors.primary,
-    placeholderColor = MaterialTheme.colors.primary,
-    disabledPlaceholderColor = MaterialTheme.colors.primary
+    textColor = MaterialTheme.colorScheme.primary,
+    focusedLabelColor = MaterialTheme.colorScheme.primary,
+    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+    unfocusedIndicatorColor = MaterialTheme.colorScheme.primary,
+    cursorColor = MaterialTheme.colorScheme.primary,
+    placeholderColor = MaterialTheme.colorScheme.primary,
+    disabledPlaceholderColor = MaterialTheme.colorScheme.primary
 )
 

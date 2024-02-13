@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.theme
 
-import androidx.compose.material.Typography
+
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 
@@ -18,63 +19,63 @@ private val Grotesk = FontFamily(
 
 // Set of Material typography styles to start with
 val typography = Typography(
-    h2 = TextStyle(
+    headlineSmall = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W600,
         fontSize = 48.sp
     ),
-    h3 = TextStyle(
+    headlineLarge = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.Normal,
         fontSize = 36.sp
     ),
-    h4 = TextStyle(
+    headlineMedium = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W600,
         fontSize = 30.sp
     ),
-    h5 = TextStyle(
+    displaySmall = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W600,
         fontSize = 24.sp
     ),
-    h6 = TextStyle(
+    bodyLarge = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W600,
         fontSize = 20.sp
     ),
-    subtitle1 = TextStyle(
+    titleSmall = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W500,
         fontSize = 16.sp
     ),
-    subtitle2 = TextStyle(
+    titleMedium = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W500,
         fontSize = 14.sp
     ),
-    body1 = TextStyle(
+    bodySmall = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp
     ),
-    body2 = TextStyle(
+    bodyMedium = TextStyle(
         fontFamily = Grotesk,
         fontSize = 14.sp,
         lineHeight = 20.sp
     ),
-    button = TextStyle(
+    labelSmall = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W500,
         fontSize = 14.sp
     ),
-    caption = TextStyle(
+    labelMedium = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     ),
-    overline = TextStyle(
+    labelLarge = TextStyle(
         fontFamily = Grotesk,
         fontWeight = FontWeight.W500,
         fontSize = 12.sp
