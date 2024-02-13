@@ -4,7 +4,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -20,8 +19,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -30,10 +27,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import com.example.myapplication.Model.Abilities
-import com.example.myapplication.Model.AbilitiesItem
 import com.example.myapplication.R
 import com.example.myapplication.Utils.parseGenToId
 import com.example.myapplication.Utils.parseStatToAbbr
@@ -79,12 +73,7 @@ fun PokemonDetailCard(
     Female: Double,
     Game: String,
     Region: String,
-
-
-
-
 ) {
-
 // Transparent white bg
     Box(
         Modifier
@@ -103,7 +92,7 @@ fun PokemonDetailCard(
             )
             .padding(start = 20.dp, end = 16.dp, top = 40.dp)
             .clip(RoundedCornerShape(12.dp)),
-        contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center
     ) {
 
  //white box layout
@@ -151,7 +140,6 @@ fun PokemonDetailCard(
                 Female,
                 Game,
                 Region,
-
             )
       }
     }

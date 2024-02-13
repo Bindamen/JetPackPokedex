@@ -3,12 +3,10 @@ package com.example.myapplication.Component
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
@@ -27,9 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -37,9 +33,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.myapplication.Navigation.MainActions
 import com.example.myapplication.R
-import com.example.myapplication.Utils.parseStatToColor
 import com.example.myapplication.Utils.parseTypeToColor
 import com.example.myapplication.ui.theme.*
+import java.lang.reflect.Type
 import java.util.*
 
 
@@ -141,19 +137,24 @@ fun ChipView(types: String) {
 }
 
 @Composable
-fun TopBar(name:String, action: MainActions){
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically) {
-        Icon(imageVector = Icons.Default.ArrowBack,
-            contentDescription = stringResource(R.string.text_back_button),
-            modifier = Modifier.clickable(onClick = action.upPress))
-        Spacer(modifier = Modifier.width(12.dp))
-        Text(text = name, style = typography.displaySmall, color = MaterialTheme.colorScheme.onSurface)
-    }
+fun TopBar(name: String, action: MainActions){
 
+    Surface(
+        color = Color.Transparent,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically) {
+            Icon(imageVector = Icons.Default.ArrowBack,
+                contentDescription = stringResource(R.string.text_back_button),
+                modifier = Modifier.clickable(onClick = action.upPress))
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(text = name, style = typography.displaySmall, color = MaterialTheme.colorScheme.onSurface)
+        }
+    }
 }
 @Composable
 fun LabelView(title: String) {

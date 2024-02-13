@@ -1,39 +1,37 @@
 package com.example.myapplication.View
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.Component.PokemonDetailCard
 import com.example.myapplication.Component.TopBar
 import com.example.myapplication.Navigation.MainActions
 import com.example.myapplication.R
-import com.example.myapplication.Utils.AbilityViewState
 import com.example.myapplication.Utils.DetailViewState
 import com.example.myapplication.ViewModel.MainViewModel
-import com.example.myapplication.ui.theme.typography
+
+import com.example.myapplication.Utils.parseTypeToColor
+import java.lang.reflect.Type
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PokemonDetailsScreen(viewModel: MainViewModel, actions: MainActions) {
-
-    Scaffold(topBar = {
-//
-        TopBar(name = stringResource(id = R.string.text_PokemonDetails), action = actions)
-    }) {
+fun PokemonDetailsScreen(viewModel: MainViewModel,actions: MainActions) {
+    Scaffold(
+        topBar = {
+            TopBar(
+                name = stringResource(id = R.string.text_PokemonDetails),
+                action = actions
+            )
+        }
+    ) {
         PokemonDetails(viewModel = viewModel)
     }
 }
+
 
 
 

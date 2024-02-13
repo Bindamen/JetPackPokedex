@@ -56,7 +56,7 @@ fun NavGraph() {
             viewModel.getPokemonID(context = context, idNo = id)
             viewModel.getAbilities(context = context)
 
-            PokemonDetailsScreen(viewModel, actions)
+            PokemonDetailsScreen(viewModel,actions)
 
 
         }
