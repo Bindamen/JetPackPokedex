@@ -42,18 +42,17 @@ import java.util.*
 @Composable
 fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemClick : () -> Unit) {
 
-
     Card(modifier = Modifier
         .clickable(onClick = onItemClick)
-        .clip(RoundedCornerShape(10.dp))
+        .clip(RoundedCornerShape(20.dp))
         .background(MaterialTheme.colorScheme.background)
         .padding(8.dp),
     )
-
     {
 
         Row(modifier = Modifier
             .fillMaxWidth()
+            .padding(start = 6.dp)
             .background(
                 Brush.horizontalGradient(
                     listOf(
@@ -65,48 +64,39 @@ fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemCl
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically) {
 
-            Image(
-                    painter = rememberImagePainter(
-                    data = imageURL,
-                    builder = {
 
-                        transformations()
+            Column {
+                Text(
+                    modifier = Modifier.padding(5.dp),
+                    text = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
+                    style = typography.bodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    textAlign = TextAlign.Start
+
+                )
+                Spacer(modifier = Modifier.size(12.dp))
+                Row {
+                    Column {
+                        type.forEach {
+                            ChipView(types = it)
+                            Spacer(modifier = Modifier.padding(top = 5.dp))
+                        }
                     }
-                ),
+                    Image(
+                        painter = rememberImagePainter(
+                            data = imageURL,
+                            builder = {
 
-                contentDescription = null,
-                modifier = Modifier
-                    .size(120.dp)
-                    .padding(12.dp)
-
-            )
-
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(
-                modifier = Modifier,
-                horizontalAlignment = Alignment.Start
-            ) {
-            Text(
-                modifier = Modifier.padding(5.dp),
-                text = name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-                style = typography.bodyLarge,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface,
-                textAlign = TextAlign.Start
-
-            )
-            Spacer(modifier = Modifier.size(12.dp))
-
-                Spacer(modifier = Modifier.size(10.dp))
-                Row(modifier = Modifier,
-                    horizontalArrangement = Arrangement.Start
-                ) {
-
-                    type.forEach {
-
-                        ChipView(types = it)
-                        Spacer(modifier = Modifier.padding(top = 7.dp))
-                    }
+                                transformations()
+                            }
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(80.dp)
+                            .padding(start = 4.dp)
+                            .offset(y = -20.dp, x = 10.dp)
+                    )
                 }
             }
         }

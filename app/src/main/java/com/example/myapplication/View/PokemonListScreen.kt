@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -53,9 +54,9 @@ fun PokemonListScreen(viewModel: MainViewModel, actions: MainActions) {
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PokemonList(pokemonList: List<PokemonItem>, actions: MainActions) {
-    val search = remember { mutableStateOf("") }
+    val searchQuery = remember { mutableStateOf("") }
+    val selectedType = remember { mutableStateOf<String?>(null) } // Use null when no type is selected
     val listState = rememberLazyListState()
-    val filterPokemonItem = remember { mutableStateOf("") }
 
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -78,45 +79,89 @@ fun PokemonList(pokemonList: List<PokemonItem>, actions: MainActions) {
                 Spacer(modifier = Modifier.height(10.dp))
                 TextInputField(
                     label = stringResource(R.string.text_search),
-                    value = search.value,
-                    onValueChanged = { search.value = it }
+                    value = searchQuery.value,
+                    onValueChanged = { searchQuery.value = it }
                 )
             }
-
             // Horizontal Scrollable Chip Group (optional)
             Row(
                 modifier = Modifier
                     .padding(top = 15.dp, start = 8.dp, end = 8.dp, bottom = 15.dp)
                     .horizontalScroll(rememberScrollState())
-
             ) {
                 for (type in getAllTypeCategories()) {
+                    val isSelected = selectedType.value == type.value
                     TypeFilterChip(
                         typeP = type.value,
                         onValueChanged = {
-                            filterPokemonItem.value = it
-                            search.value = it
+                            if (isSelected) {
+                                // If the type is already selected, unselect it
+                                selectedType.value = null
+                            } else {
+                                // Otherwise, update the selected type
+                                selectedType.value = it
+                            }
+
+
+                            // Do not automatically set the search query when selecting a type
                         }
                     )
                 }
             }
 
-            // Pokemon List
             LazyColumn(
+                contentPadding = PaddingValues(2.dp),
                 state = listState,
-                contentPadding = PaddingValues(top = 24.dp, bottom = 24.dp),
                 modifier = Modifier.background(MaterialTheme.colorScheme.background)
             ) {
-                items(pokemonList.filter {
-                    it.name.contains(search.value, ignoreCase = true) ||
-                            it.type.toString().contains(search.value)
-                }) { pokemon ->
-                    ItemPokemonList(
-                        pokemon.name,
-                        pokemon.imageURL,
-                        pokemon.type,
-                        onItemClick = { actions.gotoPokemonDetails.invoke(pokemon.id.toString()) }
-                    )
+                val filteredList = pokemonList.filter { pokemon ->
+                    val nameMatch = pokemon.name.contains(searchQuery.value, ignoreCase = true)
+                    val typeMatch = selectedType.value?.let {
+                        pokemon.type.toString().contains(it, ignoreCase = true)
+                    } ?: true // If no type is selected, typeMatch is always true
+                    nameMatch && typeMatch // Use logical AND to ensure both conditions are met
+                }
+
+
+                items((filteredList.size + 1) / 2) { rowIndex ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        val index1 = rowIndex * 2
+                        val index2 = index1 + 1
+
+                        Box(
+                            modifier = Modifier.weight(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (index1 < filteredList.size) {
+                                val pokemon1 = filteredList[index1]
+                                ItemPokemonList(
+                                    pokemon1.name,
+                                    pokemon1.imageURL,
+                                    pokemon1.type,
+                                    onItemClick = { actions.gotoPokemonDetails.invoke(pokemon1.id.toString()) }
+                                )
+                            }
+                        }
+
+                        Box(
+                            modifier = Modifier.weight(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (index2 < filteredList.size) {
+                                val pokemon2 = filteredList[index2]
+                                ItemPokemonList(
+                                    pokemon2.name,
+                                    pokemon2.imageURL,
+                                    pokemon2.type,
+                                    onItemClick = { actions.gotoPokemonDetails.invoke(pokemon2.id.toString()) }
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }
