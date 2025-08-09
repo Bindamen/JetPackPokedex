@@ -41,9 +41,10 @@ import java.util.*
 @Composable
 fun ItemPokemonList(name: String, imageURL: String, type: List<String>, onItemClick : () -> Unit) {
 
-    Card(modifier = Modifier
+    Card(
+        modifier = Modifier
         .clickable(onClick = onItemClick)
-        .clip(RoundedCornerShape(20.dp))
+        .clip(RoundedCornerShape(30.dp))
         .background(MaterialTheme.colorScheme.background)
         .padding(8.dp),
     )

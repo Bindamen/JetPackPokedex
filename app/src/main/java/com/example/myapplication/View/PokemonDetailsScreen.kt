@@ -1,5 +1,6 @@
 package com.example.myapplication.View
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 
@@ -17,13 +18,14 @@ import com.example.myapplication.ViewModel.MainViewModel
 import com.example.myapplication.Utils.parseTypeToColor
 import java.lang.reflect.Type
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PokemonDetailsScreen(viewModel: MainViewModel,actions: MainActions) {
     Scaffold(
         topBar = {
             TopBar(
-                name = stringResource(id = R.string.text_PokemonDetails),
+                name = stringResource(id = R.string.text_PokemonList),
                 action = actions
             )
         }
@@ -35,6 +37,7 @@ fun PokemonDetailsScreen(viewModel: MainViewModel,actions: MainActions) {
 
 
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun PokemonDetails(viewModel: MainViewModel) {
 

@@ -1,5 +1,6 @@
 package com.example.myapplication.Component
 
+import android.R.attr.maxWidth
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -511,8 +512,8 @@ fun PokemonDetailDataItem(
 @Composable
 fun PokemonStat(
     statName: String,
-    statValue: Int,
-    statMaxValue: Int,
+    statValue: Int = 0,
+    statMaxValue: Int = 200,
     statColor: Color,
     height: Dp = 25.dp,
     animDuration: Int = 1000,
@@ -521,8 +522,9 @@ fun PokemonStat(
     var animationPlayed by remember {
         mutableStateOf(false)
     }
+
     val curPercent = animateFloatAsState(
-        targetValue = if (animationPlayed) {
+        targetValue = if (animationPlayed && statValue > 0) {
             statValue / statMaxValue.toFloat()
         } else 0f,
         animationSpec = tween(
@@ -530,6 +532,7 @@ fun PokemonStat(
             animDelay
         )
     )
+
     LaunchedEffect(key1 = true) {
         animationPlayed = true
     }
@@ -590,13 +593,13 @@ fun PokemonStat(
 
 @Composable
 fun PokemonBaseStats(
-    hp: Int,
-    Speed: Int,
-    SpAttack: Int,
-    SpDefense: Int,
-    Attack: Int,
-    Defense: Int,
-    BaseTotal: Int,
+    hp: Int = 0,
+    Speed: Int = 0,
+    SpAttack: Int = 0,
+    SpDefense: Int = 0,
+    Attack: Int = 0,
+    Defense: Int = 0,
+    BaseTotal: Int = 0,
     type: List<String>,
     animDelayPerItem: Int = 1
 ) {
@@ -615,7 +618,6 @@ fun PokemonBaseStats(
 
 
         PokemonStat(
-
             statName = parseStatToAbbr("HP"),
             statValue = hp,
             statMaxValue = BaseTotal/3,
