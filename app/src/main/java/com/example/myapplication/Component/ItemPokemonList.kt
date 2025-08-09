@@ -13,6 +13,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -32,8 +33,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.myapplication.Navigation.MainActions
+
 import com.example.myapplication.R
 import com.example.myapplication.Utils.parseTypeToColor
+
 import com.example.myapplication.ui.theme.*
 import java.util.*
 
@@ -130,7 +133,7 @@ fun ChipView(types: String) {
 fun TopBar(name: String, action: MainActions){
 
     Surface(
-        color = Color.Transparent,
+        color = MaterialTheme.colorScheme.surface,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(modifier = Modifier
@@ -164,8 +167,8 @@ fun TextInputField(label: String, value: String, onValueChanged: (String) -> Uni
 
     Box {
         OutlinedTextField(modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 8.dp, end = 8.dp),
+            .fillMaxWidth(),
+            //.padding(start = 4.dp, end = 4.dp),
             value = value,
             onValueChange = {
                 onValueChanged(it)
@@ -186,26 +189,29 @@ fun TextInputField(label: String, value: String, onValueChanged: (String) -> Uni
 @Composable
 fun TypeFilterChip(
     typeP:String,
-
-    onValueChanged: (String) -> Unit
+    selected: Boolean,
+    onValueChanged: (String) -> Unit,
+    onSelect: (String) -> Unit
 
 ){
     Surface(
         modifier = Modifier
             .padding(end = 8.dp),
-
         shape = MaterialTheme.shapes.medium,
+        color = if (selected) parseTypeToColor(typeP) else MaterialTheme.colorScheme.surface,
+        tonalElevation = if (selected) 4.dp else 0.dp
 
     ){
         Row(modifier = Modifier
             .clickable(onClick = {
                 onValueChanged(typeP)
+                onSelect(typeP)
             })
         ) {
             Text(
                 text = typeP.capitalize(),
                 style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = if (selected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(8.dp)
             )
         }

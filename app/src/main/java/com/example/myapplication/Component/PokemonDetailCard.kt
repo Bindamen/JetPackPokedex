@@ -1,6 +1,5 @@
 package com.example.myapplication.Component
 
-import android.R.attr.maxWidth
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -33,6 +32,8 @@ import com.example.myapplication.R
 import com.example.myapplication.Utils.parseGenToId
 import com.example.myapplication.Utils.parseStatToAbbr
 import com.example.myapplication.Utils.parseTypeToColor
+
+
 import java.util.*
 
 

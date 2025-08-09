@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -27,6 +28,7 @@ import com.example.myapplication.Model.PokemonItem
 import com.example.myapplication.Navigation.MainActions
 import com.example.myapplication.R
 import com.example.myapplication.Utils.ViewState
+import com.example.myapplication.Utils.parseTypeToColor
 import com.example.myapplication.ViewModel.MainViewModel
 
 
@@ -50,6 +52,7 @@ fun PokemonList(pokemonList: List<PokemonItem>, actions: MainActions) {
     val searchQuery = remember { mutableStateOf("") }
     val selectedType = remember { mutableStateOf<String?>(null) } // Use null when no type is selected
     val listState = rememberLazyListState()
+    val selectedColor = remember { mutableStateOf<String?>(null) }
 
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -86,20 +89,24 @@ fun PokemonList(pokemonList: List<PokemonItem>, actions: MainActions) {
                     val isSelected = selectedType.value == type.value
                     TypeFilterChip(
                         typeP = type.value,
+                        selected = isSelected,
                         onValueChanged = {
                             if (isSelected) {
-                                // If the type is already selected, unselect it
                                 selectedType.value = null
                             } else {
-                                // Otherwise, update the selected type
                                 selectedType.value = it
                             }
-
-
-                            // Do not automatically set the search query when selecting a type
+                        },
+                        onSelect = {
+                            if (isSelected) {
+                                selectedColor.value = null
+                            } else {
+                                selectedColor.value = parseTypeToColor(it).toString()
+                            }
                         }
                     )
                 }
+
             }
 
             LazyColumn(

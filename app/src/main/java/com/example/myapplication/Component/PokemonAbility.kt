@@ -1,5 +1,6 @@
 package com.example.myapplication.Component
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.example.myapplication.Utils.*
 import com.example.myapplication.ViewModel.MainViewModel
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun PokemonTech(
     viewModel: MainViewModel,
