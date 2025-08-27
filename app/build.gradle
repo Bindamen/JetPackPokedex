@@ -12,13 +12,13 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('/Users/benjamineffosse/Keystores/Untitled')
+            storeFile file('/Users/beneffosse/StudioProjects/Keystores')
             storePassword 'Bindamen7281'
             keyAlias 'key0'
             keyPassword 'Bindamen7281'
         }
         Bindamen {
-            storeFile file('/Users/benjamineffosse/Keystores/Untitled')
+            storeFile file('/Users/beneffosse/StudioProjects/Keystores')
             storePassword 'Bindamen7281'
             keyAlias 'key0'
             keyPassword 'Bindamen7281'
