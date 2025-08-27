@@ -32,6 +32,13 @@ import com.example.myapplication.R
 import com.example.myapplication.Utils.parseGenToId
 import com.example.myapplication.Utils.parseStatToAbbr
 import com.example.myapplication.Utils.parseTypeToColor
+import com.example.myapplication.ui.theme.AtkColor
+import com.example.myapplication.ui.theme.BaseColor
+import com.example.myapplication.ui.theme.DefColor
+import com.example.myapplication.ui.theme.HPColor
+import com.example.myapplication.ui.theme.SpAtkColor
+import com.example.myapplication.ui.theme.SpDefColor
+import com.example.myapplication.ui.theme.SpdColor
 
 
 import java.util.*
@@ -514,7 +521,7 @@ fun PokemonDetailDataItem(
 fun PokemonStat(
     statName: String,
     statValue: Int = 0,
-    statMaxValue: Int = 200,
+    statMaxValue: Int = 100,
     statColor: Color,
     height: Dp = 25.dp,
     animDuration: Int = 1000,
@@ -578,8 +585,8 @@ fun PokemonStat(
 
             Text(
                 text = statName,
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp,
+                fontWeight = FontWeight.Thin,
+                fontSize = 12.sp,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
 
@@ -621,56 +628,56 @@ fun PokemonBaseStats(
         PokemonStat(
             statName = parseStatToAbbr("HP"),
             statValue = hp,
-            statMaxValue = BaseTotal/3,
-            statColor = parseTypeToColor(type[0]),
+            statMaxValue = BaseTotal/2,
+            statColor = HPColor,
             animDelay = hp * animDelayPerItem
         )
         Spacer(modifier = Modifier.height(7.dp))
         PokemonStat(
             statName = parseStatToAbbr("Attack"),
             statValue = Attack,
-            statMaxValue = BaseTotal/3,
-            statColor = parseTypeToColor(type[0]),
+            statMaxValue = BaseTotal/2,
+            statColor = AtkColor,
             animDelay = Attack * animDelayPerItem
         )
         Spacer(modifier = Modifier.height(7.dp))
         PokemonStat(
             statName = parseStatToAbbr("Defense"),
             statValue = Defense,
-            statMaxValue = BaseTotal/3,
-            statColor = parseTypeToColor(type[0]),
+            statMaxValue = BaseTotal/2,
+            statColor = DefColor,
             animDelay = Defense * animDelayPerItem
         )
         Spacer(modifier = Modifier.height(7.dp))
         PokemonStat(
             statName = parseStatToAbbr("SpAttack"),
             statValue = SpAttack,
-            statMaxValue = BaseTotal/3,
-            statColor = parseTypeToColor(type[0]),
+            statMaxValue = BaseTotal/2,
+            statColor = SpAtkColor,
             animDelay = SpAttack * animDelayPerItem
         )
         Spacer(modifier = Modifier.height(7.dp))
         PokemonStat(
             statName = parseStatToAbbr("SpDefense"),
             statValue = SpDefense,
-            statMaxValue = BaseTotal/3,
-            statColor = parseTypeToColor(type[0]),
+            statMaxValue = BaseTotal/2,
+            statColor = SpDefColor,
             animDelay = SpDefense * animDelayPerItem
         )
         Spacer(modifier = Modifier.height(7.dp))
         PokemonStat(
             statName = parseStatToAbbr("Speed"),
             statValue = Speed,
-            statMaxValue = BaseTotal/3,
-            statColor = parseTypeToColor(type[0]),
+            statMaxValue = BaseTotal/2,
+            statColor = SpdColor,
             animDelay = Speed * animDelayPerItem
         )
         Spacer(modifier = Modifier.height(7.dp))
         PokemonStat(
             statName = "BaseTotal",
             statValue = BaseTotal,
-            statMaxValue = BaseTotal/3,
-            statColor = parseTypeToColor(type[0]),
+            statMaxValue = BaseTotal/2,
+            statColor = BaseColor,
             animDelay = 200 * animDelayPerItem
         )
         Spacer(modifier = Modifier.height(7.dp))
@@ -737,7 +744,7 @@ fun PokemonWeaknesses(
                         Text(
                             text = "X $against_acier",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             modifier = Modifier.align(Alignment.CenterVertically),
                             color = Color.Red
                         )
@@ -746,7 +753,7 @@ fun PokemonWeaknesses(
                         Text(
                             text = "X $against_acier",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             modifier = Modifier.align(Alignment.CenterVertically),
                             color = Color.Green
                         )
@@ -755,7 +762,7 @@ fun PokemonWeaknesses(
                         Text(
                             text = "X $against_acier",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             modifier = Modifier.align(Alignment.CenterVertically)
                         )
                     }
@@ -776,7 +783,7 @@ fun PokemonWeaknesses(
                         Text(
                             text = "X $against_combat",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             modifier = Modifier.align(Alignment.CenterVertically),
                             color = Color.Red
                         )
@@ -785,7 +792,7 @@ fun PokemonWeaknesses(
                         Text(
                             text = "X $against_combat",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             modifier = Modifier.align(Alignment.CenterVertically),
                             color = Color.Green
                         )
@@ -794,7 +801,7 @@ fun PokemonWeaknesses(
                         Text(
                             text = "X $against_combat",
                             fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             modifier = Modifier.align(Alignment.CenterVertically)
                         )
                     }
@@ -813,7 +820,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_eau",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -821,7 +828,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_eau",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -829,7 +836,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_eau",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -848,7 +855,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_dragon",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -856,7 +863,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_dragon",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -864,7 +871,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_dragon",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -885,7 +892,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_electric",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -893,7 +900,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_electric",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -901,7 +908,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_electric",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -919,7 +926,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_fée",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -927,7 +934,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_fée",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -935,7 +942,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_fée",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -956,7 +963,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_feu",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -964,7 +971,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_feu",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -972,7 +979,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_feu",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -991,7 +998,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_glace",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -999,7 +1006,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_glace",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1007,7 +1014,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_glace",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1025,7 +1032,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_insecte",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1033,7 +1040,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_insecte",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1041,7 +1048,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_insecte",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1060,7 +1067,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_normal",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1068,7 +1075,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_normal",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1076,7 +1083,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_normal",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1095,7 +1102,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_plante",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1103,7 +1110,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_plante",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1111,7 +1118,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_plante",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1129,7 +1136,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_poison",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1137,7 +1144,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_poison",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1145,7 +1152,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_poison",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1166,7 +1173,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_psy",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1174,7 +1181,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_psy",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1182,7 +1189,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_psy",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1201,7 +1208,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_roche",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1209,7 +1216,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_roche",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1217,7 +1224,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_roche",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1235,7 +1242,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_spectre",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1243,7 +1250,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_spectre",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1251,7 +1258,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_spectre",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1270,7 +1277,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_sol",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1278,7 +1285,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_sol",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1286,7 +1293,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_sol",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1305,7 +1312,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_ténèbres",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1313,7 +1320,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_ténèbres",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1321,7 +1328,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_ténèbres",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1339,7 +1346,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_vol",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Red
                     )
@@ -1347,7 +1354,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_vol",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically),
                         color = Color.Green
                     )
@@ -1355,7 +1362,7 @@ fun PokemonWeaknesses(
                     Text(
                         text = "X $against_vol",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -1369,8 +1376,6 @@ fun PokemonDescription(
     Gen: Int,
 
 ) {
-
-
     Column(
         modifier = Modifier.padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -1386,15 +1391,8 @@ fun PokemonDescription(
             painter = painterResource(parseGenToId(Gen)),
             contentDescription = "",
             alignment = Alignment.Center,
-
-
         )
-
-
-
-        }
-
-
     }
+}
 
 
